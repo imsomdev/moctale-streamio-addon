@@ -22,7 +22,6 @@ You can still override the `.env` value with `--cookie "..."` or the shell varia
 The script writes:
 
 - `moctale_items.json`
-- `moctale_items.csv`
 
 The JSON file groups items by section/provider when the API exposes headings such as Netflix,
 Amazon, Hotstar, etc.

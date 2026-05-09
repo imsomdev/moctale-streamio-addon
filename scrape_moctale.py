@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import argparse
-import csv
 import json
 import os
 import re
@@ -12,7 +11,6 @@ from typing import Any
 from urllib.parse import urljoin
 
 import httpx
-from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 
 # Load .env automatically (MOCTALE_COOKIE="session=abc123; other=val")
@@ -108,6 +106,7 @@ ARRAY_KEYS = (
     "cards",
     "rows",
 )
+EXCLUDED_SECTIONS = {"page"}
 
 
 @dataclass(frozen=True)
@@ -119,41 +118,6 @@ class ScrapedItem:
     year: str = ""
     type: str = ""
     raw: dict[str, Any] = field(default_factory=dict)
-
-
-def parse_html_items(html: str, base_url: str) -> list[ScrapedItem]:
-    """Extract image/link items from rendered HTML using BeautifulSoup."""
-    soup = BeautifulSoup(html, "lxml")
-    items: list[ScrapedItem] = []
-    for img in soup.find_all("img"):
-        poster = (
-            img.get("src")
-            or img.get("data-src")
-            or img.get("data-nimg")
-            or (img.get("srcset", "").split(" ", 1)[0])
-        )
-        if not poster:
-            continue
-        name = img.get("alt") or img.get("title") or ""
-        if not name or name.lower() in {"content poster", "poster", "image"}:
-            name = ""
-        parent_a = img.find_parent("a")
-        link = (
-            urljoin(base_url, parent_a["href"])
-            if parent_a and parent_a.get("href")
-            else ""
-        )
-        items.append(
-            ScrapedItem(
-                section="page",
-                name=clean_text(name),
-                link=link,
-                poster_url=absolute_url(poster, base_url),
-                year=extract_year_from_slug(link),
-                type="movie",
-            )
-        )
-    return items
 
 
 def clean_text(value: Any) -> str:
@@ -422,7 +386,6 @@ def scrape_page(client: httpx.Client, base_url: str) -> tuple[list[ScrapedItem],
     items: list[ScrapedItem] = []
     for blob in extract_next_json(html):
         items.extend(walk_json(blob, "page-data", base_url))
-    items.extend(parse_html_items(html, base_url))
 
     hint = (
         "login page"
@@ -464,7 +427,6 @@ def scrape_page_playwright(base_url: str, cookie: str) -> tuple[list[ScrapedItem
     items: list[ScrapedItem] = []
     for blob in extract_next_json(html):
         items.extend(walk_json(blob, "page-data", base_url))
-    items.extend(parse_html_items(html, base_url))
     return items, "playwright render"
 
 
@@ -491,25 +453,6 @@ def write_json(items: list[ScrapedItem], output_path: str) -> None:
         json.dump(payload, file, ensure_ascii=False, indent=2)
 
 
-def write_csv(items: list[ScrapedItem], output_path: str) -> None:
-    with open(output_path, "w", newline="", encoding="utf-8") as file:
-        writer = csv.DictWriter(
-            file, fieldnames=["section", "name", "year", "type", "link", "poster_url"]
-        )
-        writer.writeheader()
-        for item in items:
-            writer.writerow(
-                {
-                    "section": item.section,
-                    "name": item.name,
-                    "year": item.year,
-                    "type": item.type,
-                    "link": item.link,
-                    "poster_url": item.poster_url,
-                }
-            )
-
-
 def get_cookie_default() -> str:
     # load_dotenv() already ran at module level; os.getenv is sufficient
     return os.getenv("MOCTALE_COOKIE", "")
@@ -522,7 +465,6 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--base-url", default=BASE_URL)
     parser.add_argument("--cookie", default=get_cookie_default())
     parser.add_argument("--json", default="moctale_items.json", dest="json_path")
-    parser.add_argument("--csv", default="moctale_items.csv", dest="csv_path")
     parser.add_argument(
         "--page-only",
         action="store_true",
@@ -567,15 +509,18 @@ def main() -> int:
             items.extend(page_items)
 
     items = dedupe_items(
-        [item for item in items if item.name or item.poster_url or item.link]
+        [
+            item
+            for item in items
+            if (item.name or item.poster_url or item.link)
+            and item.section.lower() not in EXCLUDED_SECTIONS
+        ]
     )
 
     write_json(items, args.json_path)
-    write_csv(items, args.csv_path)
 
     print(f"Scraped {len(items)} items")
     print(f"Wrote {args.json_path}")
-    print(f"Wrote {args.csv_path}")
     if errors:
         print("\nNotes:")
         for error in errors:

@@ -11,3 +11,7 @@ wheels/
 
 # Local secrets
 .env
+
+# Generated scrape outputs
+moctale_items.json
+moctale_items.csv
