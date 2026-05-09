@@ -84,6 +84,18 @@ YEAR_KEYS = (
     "premiere",
 )
 
+SHOW_KEYS = (
+    "is_show",
+    "isShow",
+    "is_series",
+    "isSeries",
+    "media_type",
+    "mediaType",
+    "content_type",
+    "contentType",
+    "type",
+)
+
 ARRAY_KEYS = (
     "items",
     "results",
@@ -105,6 +117,7 @@ class ScrapedItem:
     link: str = ""
     poster_url: str = ""
     year: str = ""
+    type: str = ""
     raw: dict[str, Any] = field(default_factory=dict)
 
 
@@ -137,6 +150,7 @@ def parse_html_items(html: str, base_url: str) -> list[ScrapedItem]:
                 link=link,
                 poster_url=absolute_url(poster, base_url),
                 year=extract_year_from_slug(link),
+                type="movie",
             )
         )
     return items
@@ -184,6 +198,23 @@ def extract_year(value: Any, obj: dict[str, Any], link: str) -> str:
             if 1888 <= int(y) <= 2100:
                 return y
     return ""
+
+
+def extract_media_type(obj: dict[str, Any], link: str, name: str) -> str:
+    raw = first_value(obj, SHOW_KEYS)
+    if isinstance(raw, bool):
+        return "series" if raw else "movie"
+    text = clean_text(raw).lower()
+    if text in {"true", "show", "shows", "tv", "series", "anime", "tv show", "web series"}:
+        return "series"
+    if text in {"false", "movie", "movies", "film", "films"}:
+        return "movie"
+
+    # Fallback: check name/link for series hints
+    series_patterns = re.compile(r"\bseason\s*\d|\bepisode\s*\d|\bss\d|part\s*\d+\s*:\s*|tv\s*show|web\s*series\b", re.IGNORECASE)
+    if series_patterns.search(name) or series_patterns.search(link):
+        return "series"
+    return "movie"
 
 
 def lower_keys(obj: dict[str, Any]) -> dict[str, Any]:
@@ -249,6 +280,7 @@ def item_from_object(
     poster = absolute_url(poster_val, base_url)
     link = normalize_possible_link(first_value(obj, LINK_KEYS, lowered), obj, base_url)
     year = extract_year(obj, obj, link)
+    media_type = extract_media_type(obj, link, name)
 
     return ScrapedItem(
         section=section or "unknown",
@@ -256,6 +288,7 @@ def item_from_object(
         link=link,
         poster_url=poster,
         year=year,
+        type=media_type,
         raw=obj,
     )
 
@@ -287,7 +320,7 @@ def walk_json(value: Any, section: str, base_url: str) -> list[ScrapedItem]:
 
 
 def dedupe_items(items: list[ScrapedItem]) -> list[ScrapedItem]:
-    seen: set[tuple[str, str, str, str, str]] = set()
+    seen: set[tuple[str, str, str, str, str, str]] = set()
     unique: list[ScrapedItem] = []
 
     for item in items:
@@ -297,6 +330,7 @@ def dedupe_items(items: list[ScrapedItem]) -> list[ScrapedItem]:
             item.link.lower(),
             item.poster_url.lower(),
             item.year,
+            item.type,
         )
         if key in seen:
             continue
@@ -441,6 +475,7 @@ def write_json(items: list[ScrapedItem], output_path: str) -> None:
             {
                 "name": item.name,
                 "year": item.year,
+                "type": item.type,
                 "link": item.link,
                 "poster_url": item.poster_url,
             }
@@ -459,7 +494,7 @@ def write_json(items: list[ScrapedItem], output_path: str) -> None:
 def write_csv(items: list[ScrapedItem], output_path: str) -> None:
     with open(output_path, "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(
-            file, fieldnames=["section", "name", "year", "link", "poster_url"]
+            file, fieldnames=["section", "name", "year", "type", "link", "poster_url"]
         )
         writer.writeheader()
         for item in items:
@@ -468,6 +503,7 @@ def write_csv(items: list[ScrapedItem], output_path: str) -> None:
                     "section": item.section,
                     "name": item.name,
                     "year": item.year,
+                    "type": item.type,
                     "link": item.link,
                     "poster_url": item.poster_url,
                 }

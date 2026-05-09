@@ -1,93 +1,120 @@
 {
   "source": "https://www.moctale.in/explore",
-  "scraped_at": "2026-05-09T16:08:11Z",
-  "total_items": 44,
+  "scraped_at": "2026-05-09T18:21:06Z",
+  "total_items": 43,
   "sections": {
     "Talk Of The Town": [
       {
         "name": "Raja Shivaji",
+        "year": "2026",
+        "type": "movie",
         "link": "raja-shivaji-2026",
         "poster_url": "https://media.moctale.in/images/df0f5a85-3430-4afc-9a3b-f2439fb8d589.png"
       },
       {
         "name": "Mortal Kombat II",
+        "year": "2026",
+        "type": "movie",
         "link": "mortal-kombat-ii-2026",
         "poster_url": "https://media.moctale.in/images/11746029-de3c-4146-afd2-0201cba11782.jpg"
       },
       {
         "name": "Krishnavataram Part 1 : Heart",
+        "year": "2026",
+        "type": "movie",
         "link": "krishnavataram-part-1-heart-2026",
         "poster_url": "https://media.moctale.in/images/67492d0e-60c7-4f52-8c85-421c27147a74.jpg"
       },
       {
         "name": "The Devil Wears Prada 2",
+        "year": "2026",
+        "type": "movie",
         "link": "the-devil-wears-prada-2-2026",
         "poster_url": "https://media.moctale.in/images/98d6a401-2ec4-48be-8806-7c2517a6c305.jpg"
       },
       {
         "name": "Daredevil: Born Again",
+        "year": "2025",
+        "type": "series",
         "link": "daredevil-born-again-2025",
         "poster_url": "https://media.moctale.in/images/c094367c-014e-4846-9b94-67e03bb98f9d.jpg"
       },
       {
         "name": "The Boys",
+        "year": "2019",
+        "type": "series",
         "link": "the-boys-2019",
         "poster_url": "https://media.moctale.in/images/011d8cd6-1ee7-48f3-a1f0-10f47713bd72.jpg"
       },
       {
         "name": "Sapne vs Everyone",
+        "year": "2023",
+        "type": "series",
         "link": "sapne-vs-everyone-2023",
         "poster_url": "https://media.moctale.in/images/79966b30-b4e3-46d5-a0c8-5a3c2dd9e586.jpg"
       },
       {
         "name": "Glory",
+        "year": "2026",
+        "type": "series",
         "link": "glory-2026",
         "poster_url": "https://media.moctale.in/images/e9b9c5d5-9aab-467a-b063-a398fe62845b.jpg"
       },
       {
         "name": "The Chestnut Man",
+        "year": "2021",
+        "type": "series",
         "link": "the-chestnut-man-2021",
         "poster_url": "https://media.moctale.in/images/66a0012e-4f30-451a-b490-8af6f2b00084.jpg"
-      },
-      {
-        "name": "Bandar",
-        "link": "bandar-2026",
-        "poster_url": "https://media.moctale.in/images/19b543ea-54d8-4361-a98a-4feda6ed921d.jpg"
       }
     ],
     "Watch It With District": [
       {
         "name": "The Devil Wears Prada 2",
+        "year": "2026",
+        "type": "movie",
         "link": "the-devil-wears-prada-2-2026",
         "poster_url": "https://media.moctale.in/images/98d6a401-2ec4-48be-8806-7c2517a6c305.jpg"
       },
       {
         "name": "Mortal Kombat II",
+        "year": "2026",
+        "type": "movie",
         "link": "mortal-kombat-ii-2026",
         "poster_url": "https://media.moctale.in/images/11746029-de3c-4146-afd2-0201cba11782.jpg"
       },
       {
         "name": "Raja Shivaji",
+        "year": "2026",
+        "type": "movie",
         "link": "raja-shivaji-2026",
         "poster_url": "https://media.moctale.in/images/df0f5a85-3430-4afc-9a3b-f2439fb8d589.png"
       },
       {
         "name": "Krishnavataram Part 1 : Heart",
+        "year": "2026",
+        "type": "movie",
         "link": "krishnavataram-part-1-heart-2026",
         "poster_url": "https://media.moctale.in/images/67492d0e-60c7-4f52-8c85-421c27147a74.jpg"
       },
       {
         "name": "Ek Din",
+        "year": "2026",
+        "type": "movie",
         "link": "ek-din-2026",
         "poster_url": "https://media.moctale.in/images/ae0ad01c-8a0b-4211-8969-52bbc4425127.jpg"
       },
       {
         "name": "Patriot",
+        "year": "2026",
+        "type": "movie",
         "link": "patriot-2026",
         "poster_url": "https://media.moctale.in/images/49ea35da-4299-4c0b-ac68-144329dc6bd4.jpg"
       },
       {
         "name": "Bhooth Bangla",
+        "year": "2026",
+        "type": "movie",
         "link": "bhooth-bangla-2026",
         "poster_url": "https://media.moctale.in/images/62ecf420-18d0-48a9-8f7c-679dab30feda.jpg"
       }
@@ -95,26 +122,36 @@
     "Editor's Pick Of The Week": [
       {
         "name": "Identity",
+        "year": "2003",
+        "type": "movie",
         "link": "identity-2003",
         "poster_url": "https://media.moctale.in/images/9a309559-dfb6-4856-9782-a1c2fdd39236.jpg"
       },
       {
         "name": "You've Got Mail",
+        "year": "1998",
+        "type": "movie",
         "link": "youve-got-mail-1998",
         "poster_url": "https://media.moctale.in/images/2e500308-36cf-49ab-acc2-286519dcb1a0.jpg"
       },
       {
         "name": "Claymore",
+        "year": "2007",
+        "type": "series",
         "link": "claymore-2007",
         "poster_url": "https://media.moctale.in/images/1bd6c1a7-eb69-4b16-8d5d-4935f91cc928.jpg"
       },
       {
         "name": "Premam",
+        "year": "2015",
+        "type": "movie",
         "link": "premam-2015",
         "poster_url": "https://media.moctale.in/images/c71cb6f7-4363-4e97-b3ee-c250d6c4e7ea.jpg"
       },
       {
         "name": "Downfall",
+        "year": "2004",
+        "type": "movie",
         "link": "downfall-2004",
         "poster_url": "https://media.moctale.in/images/dd607831-688d-4e75-8ecd-a23f8cf127cb.jpg"
       }
@@ -122,26 +159,36 @@
     "Don't Miss These on Netflix": [
       {
         "name": "Glory",
+        "year": "2026",
+        "type": "series",
         "link": "glory-2026",
         "poster_url": "https://media.moctale.in/images/e9b9c5d5-9aab-467a-b063-a398fe62845b.jpg"
       },
       {
         "name": "Swapped",
+        "year": "2026",
+        "type": "movie",
         "link": "swapped-2026",
         "poster_url": "https://media.moctale.in/images/922687d3-208e-494f-8496-e00d60fb310e.jpg"
       },
       {
         "name": "Biker",
+        "year": "2026",
+        "type": "movie",
         "link": "biker-2026",
         "poster_url": "https://media.moctale.in/images/0795870f-a7da-456d-a60b-b470f7322da8.jpg"
       },
       {
         "name": "If Wishes Could Kill",
+        "year": "2026",
+        "type": "series",
         "link": "if-wishes-could-kill-2026",
         "poster_url": "https://media.moctale.in/images/c9492c27-50bf-43c0-bda1-a677850e21f5.jpg"
       },
       {
         "name": "Kuroko no Basuke",
+        "year": "2012",
+        "type": "series",
         "link": "kuroko-no-basuke-2012",
         "poster_url": "https://media.moctale.in/images/a50d00a9-6a63-4ba2-8c6a-d6124458e9ae.jpg"
       }
@@ -149,26 +196,36 @@
     "Don't Miss These on JioHotstar": [
       {
         "name": "Sisu",
+        "year": "2022",
+        "type": "movie",
         "link": "sisu-2022",
         "poster_url": "https://media.moctale.in/images/af586307-e0c0-408d-a5de-0da643acdd33.jpg"
       },
       {
         "name": "King & Conqueror",
+        "year": "2025",
+        "type": "series",
         "link": "king-conqueror-2025",
         "poster_url": "https://media.moctale.in/images/eb5c82a5-4c19-4379-a0df-0ec811929684.jpg"
       },
       {
         "name": "The Stoneman Murders",
+        "year": "2009",
+        "type": "movie",
         "link": "the-stoneman-murders-2009",
         "poster_url": "https://media.moctale.in/images/5c5eb6d9-9d4c-4ff8-ae9d-e308f5b32242.jpg"
       },
       {
         "name": "Minions: The Rise of Gru",
+        "year": "2022",
+        "type": "movie",
         "link": "minions-the-rise-of-gru-2022",
         "poster_url": "https://media.moctale.in/images/b639e39a-f573-4aab-81ac-3aeb30f8c5a5.jpg"
       },
       {
         "name": "In/Spectre",
+        "year": "2020",
+        "type": "series",
         "link": "inspectre-2020",
         "poster_url": "https://media.moctale.in/images/94f147d4-1712-4ae9-a1cc-1b697dda9c0a.jpg"
       }
@@ -176,26 +233,36 @@
     "Worth Watching on Prime": [
       {
         "name": "Maargan",
+        "year": "2025",
+        "type": "movie",
         "link": "maargan-2025",
         "poster_url": "https://media.moctale.in/images/5b627d40-4edb-4a2f-8574-e03cea52ca6f.jpg"
       },
       {
         "name": "Caddo Lake",
+        "year": "2024",
+        "type": "movie",
         "link": "caddo-lake-2024",
         "poster_url": "https://media.moctale.in/images/7f663d98-b39b-464e-8cfe-fbae5e8c7475.jpg"
       },
       {
         "name": "The Outlaws",
+        "year": "2017",
+        "type": "movie",
         "link": "the-outlaws-2017",
         "poster_url": "https://media.moctale.in/images/71c5a797-5462-41f7-bcb3-e9fab97cf7af.jpg"
       },
       {
         "name": "Bleach the Movie: Memories of Nobody",
+        "year": "2006",
+        "type": "movie",
         "link": "bleach-the-movie-memories-of-nobody-2006",
         "poster_url": "https://media.moctale.in/images/3ec0c5e4-7343-4928-9507-a3c754f563fd.jpg"
       },
       {
         "name": "Two Prosecutors",
+        "year": "2025",
+        "type": "movie",
         "link": "two-prosecutors-2025",
         "poster_url": "https://media.moctale.in/images/ea73c95a-d23a-4dbe-9304-de10a65fd946.jpg"
       }
@@ -203,26 +270,36 @@
     "Worth Watching on Crunchyroll": [
       {
         "name": "Gintama: The Very Final",
+        "year": "2021",
+        "type": "movie",
         "link": "gintama-the-very-final-2021",
         "poster_url": "https://media.moctale.in/images/1e8f4c8b-df62-4f06-b52a-fe715e4fd370.jpg"
       },
       {
         "name": "School Babysitters",
+        "year": "2018",
+        "type": "series",
         "link": "school-babysitters-2018",
         "poster_url": "https://media.moctale.in/images/6e35cf88-384b-4555-9181-fb4e289e495a.jpg"
       },
       {
         "name": "The Case Study of Vanitas",
+        "year": "2021",
+        "type": "series",
         "link": "the-case-study-of-vanitas-2021",
         "poster_url": "https://media.moctale.in/images/074a4a4a-b99f-4253-8cf5-92f30213f306.jpg"
       },
       {
         "name": "Junji Ito Collection",
+        "year": "2018",
+        "type": "series",
         "link": "junji-ito-collection-2018",
         "poster_url": "https://media.moctale.in/images/317df7b7-aa98-43eb-a1b8-faf4502e254d.jpg"
       },
       {
         "name": "Kono Oto Tomare!: Sounds of Life",
+        "year": "2019",
+        "type": "series",
         "link": "kono-oto-tomare-sounds-of-life-2019",
         "poster_url": "https://media.moctale.in/images/3a75591f-4fa3-4b57-9ebc-9331e16d62b2.jpg"
       }
@@ -230,11 +307,15 @@
     "page": [
       {
         "name": "Moctale",
+        "year": "",
+        "type": "movie",
         "link": "https://www.moctale.in/explore",
         "poster_url": "https://www.moctale.in/Moctale-logo-HQ.svg"
       },
       {
         "name": "Profile",
+        "year": "",
+        "type": "movie",
         "link": "",
         "poster_url": "https://www.moctale.in/media/default-avatar.png"
       }
