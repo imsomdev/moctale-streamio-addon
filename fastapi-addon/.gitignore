@@ -1,0 +1,5 @@
+.env
+__pycache__/
+*.py[oc]
+tmdb_cache.json
+uvicorn.*.log
