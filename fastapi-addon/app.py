@@ -178,7 +178,8 @@ async def configure(request: Request) -> str:
       }};
       const encoded = base64url(JSON.stringify(config));
       const manifestUrl = `${{origin}}/${{encoded}}/manifest.json`;
-      const stremioUrl = `stremio://${{manifestUrl.replace(/^https?:\\/\\//, "")}}`;
+      const manifest = new URL(manifestUrl);
+      const stremioUrl = `stremio://${{manifest.host}}${{manifest.pathname}}`;
       document.getElementById("output").textContent = manifestUrl;
       const install = document.getElementById("install");
       install.href = stremioUrl;
