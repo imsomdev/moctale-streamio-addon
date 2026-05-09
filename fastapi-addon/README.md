@@ -28,3 +28,7 @@ Endpoints:
 - `/catalog/series/moctale-all.json?genre=All`
 - `/configure`
 - `/debug/moctale`
+
+Moctale catalog data is cached globally for `MOCTALE_CACHE_TTL_SECONDS` seconds. The
+default is 3 days, so the first configured user refreshes the shared catalog and later
+users get the same content quickly.

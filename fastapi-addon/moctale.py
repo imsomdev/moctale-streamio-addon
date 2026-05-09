@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import asyncio
-import hashlib
 import json
 import os
 import re
@@ -366,11 +365,6 @@ def scrape_page(client: httpx.Client, base_url: str) -> tuple[list[ScrapedItem],
     return items, f"parsed {response.headers.get('content-type', '')}"
 
 
-def cache_key(base_url: str, cookie: str) -> str:
-    digest = hashlib.sha256(cookie.encode("utf-8")).hexdigest()
-    return f"{base_url}|{digest}"
-
-
 def scrape_moctale_sync(
     cookie: str,
     base_url: str = BASE_URL,
@@ -401,27 +395,54 @@ async def scrape_moctale(
     base_url: str = BASE_URL,
     force: bool = False,
 ) -> dict[str, Any]:
-    ttl = int(os.getenv("MOCTALE_CACHE_TTL_SECONDS", "3600"))
-    key = cache_key(base_url.rstrip("/"), cookie)
+    ttl = int(os.getenv("MOCTALE_CACHE_TTL_SECONDS", str(3 * 24 * 60 * 60)))
 
     async with _cache_lock:
-        if not force and _cache.get("key") == key and _cache["expires_at"] > time.time():
+        if not force and _cache["items"] and _cache["expires_at"] > time.time():
             return {
                 "items": _cache["items"],
                 "notes": _cache["notes"],
                 "cached": True,
             }
 
+        if not cookie and _cache["items"]:
+            notes = [*_cache["notes"], "Serving stale shared cache; no cookie provided to refresh."]
+            return {
+                "items": _cache["items"],
+                "notes": notes,
+                "cached": True,
+                "stale": True,
+            }
+
+        if not cookie:
+            return {
+                "items": [],
+                "notes": ["Catalog cache is empty. Configure a Moctale cookie to refresh it."],
+                "cached": False,
+            }
+
         items, notes = await asyncio.to_thread(scrape_moctale_sync, cookie, base_url)
+        if not items and _cache["items"]:
+            return {
+                "items": _cache["items"],
+                "notes": [*notes, "Refresh failed; serving stale shared cache."],
+                "cached": True,
+                "stale": True,
+            }
+
         _cache.update(
             {
-                "key": key,
                 "expires_at": time.time() + ttl,
                 "items": items,
                 "notes": notes,
             }
         )
         return {"items": items, "notes": notes, "cached": False}
+
+
+async def clear_moctale_cache() -> None:
+    async with _cache_lock:
+        _cache.update({"expires_at": 0, "items": [], "notes": []})
 
 
 def item_to_dict(item: ScrapedItem) -> dict[str, str]:

@@ -11,7 +11,7 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from catalog import get_catalog
 from config import AddonConfig, decode_config
 from manifest import build_manifest
-from moctale import item_to_dict, scrape_moctale
+from moctale import clear_moctale_cache, item_to_dict, scrape_moctale
 
 
 load_dotenv()
@@ -125,6 +125,12 @@ async def configured_debug_moctale(encoded_config: str) -> dict:
         "cached": result["cached"],
         "has_cookie": bool(config.moctale_cookie),
     }
+
+
+@app.post("/debug/cache/clear")
+async def clear_cache() -> dict[str, str]:
+    await clear_moctale_cache()
+    return {"status": "cleared"}
 
 
 @app.get("/configure", response_class=HTMLResponse)
